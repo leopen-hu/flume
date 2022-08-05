@@ -217,7 +217,10 @@ const getDefaultData = ({ node, nodeType, portTypes, context }) => {
       inputType.controls ||
       []
     ).reduce((obj2, control) => {
-      obj2[control.name] = control.defaultValue;
+      obj2[control.name] =
+        typeof control.defaultValue === "function"
+          ? control.defaultValue()
+          : control.defaultValue;
       return obj2;
     }, {});
     return obj;
