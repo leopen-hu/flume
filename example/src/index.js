@@ -6,6 +6,7 @@ import TestEditor from './TestRoutes/TestEditor'
 import Form from "./pages/Form/Form";
 import Forms from "./pages/Forms/Forms";
 import Records from "./pages/Records/Records";
+import { TodoEditor } from "./pages/Todo/editor";
 import "./index.css";
 
 const FormStyles = () => (
@@ -56,13 +57,8 @@ ReactDOM.render(
           </React.Fragment>
         )}
       />
-      <Route
-        exact
-        path="/test"
-        render={() => (
-          <TestEditor />
-        )}
-      />
+      <Route exact path="/test" render={() => <TestEditor />} />
+      <Route exact path="/todo" render={() => <TodoEditor />} />
     </Switch>
   </Router>,
   document.getElementById("root")

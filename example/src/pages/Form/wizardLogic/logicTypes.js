@@ -177,7 +177,7 @@ export const NodeTypes = {
         controls: [
           {
             type: "select",
-            name: "statusIfTrue",
+            name: "selectedStatus",
             placeholder: "Status if True",
             options: statusOptions
           }
@@ -190,7 +190,7 @@ export const NodeTypes = {
         controls: [
           {
             type: "select",
-            name: "statusIfFalse",
+            name: "selectedStatus",
             placeholder: "Status if False",
             options: statusOptions
           }
