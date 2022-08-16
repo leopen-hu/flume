@@ -7,6 +7,7 @@ import Form from "./pages/Form/Form";
 import Forms from "./pages/Forms/Forms";
 import Records from "./pages/Records/Records";
 import { TodoEditor } from "./pages/Todo/editor";
+import { TodoPage } from "./pages/Todo/page";
 import "./index.css";
 
 const FormStyles = () => (
@@ -59,6 +60,7 @@ ReactDOM.render(
       />
       <Route exact path="/test" render={() => <TestEditor />} />
       <Route exact path="/todo" render={() => <TodoEditor />} />
+      <Route exact path="/todo/page" render={() => <TodoPage />} />
     </Switch>
   </Router>,
   document.getElementById("root")

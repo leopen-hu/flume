@@ -1,7 +1,7 @@
 import { RootEngine } from "node-editor";
-import { flumeConfig } from "./config";
 import { allPortTypes } from "./portTypes";
 import { allNodeTypes } from "./nodeTypes";
+import { createFlumeConfig } from "./config";
 
 const resolvePorts = (portType, data, context) => {
   return allPortTypes
@@ -14,4 +14,6 @@ const resolveNodes = (node, inputValues, nodeType, context) => {
     ?.resolve(node, inputValues, nodeType, context);
 };
 
-export const engine = new RootEngine(flumeConfig, resolvePorts, resolveNodes);
+export const createEngine = context => {
+  return new RootEngine(createFlumeConfig(context), resolvePorts, resolveNodes);
+};
