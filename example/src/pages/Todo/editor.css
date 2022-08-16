@@ -5,11 +5,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: rgb(17, 18, 19);
 }
 .wrapper{
   width: 1600px;
   height: 900px;
+}
+.page {
+  width: 1600px;
+  height: 900px;
+  background: #fff;
 }
 #root{
   display: flex;
@@ -20,4 +24,32 @@ body {
 }
 .website-wrapper{
   color: #fff;
+}
+
+[data-flume-component="stage"]{
+  background-color: #ddd;
+  background-image: linear-gradient(
+      0deg,
+      transparent 24%,
+      rgba(0,0,0, 0.04) 25%,
+      rgba(0,0,0, 0.04) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(0,0,0, 0.04) 75%,
+      rgba(0,0,0, 0.04) 76%,
+      transparent 77%,
+      transparent
+    ),
+    linear-gradient(
+      90deg,
+      transparent 24%,
+      rgba(0,0,0, 0.04) 25%,
+      rgba(0,0,0, 0.04) 26%,
+      transparent 27%,
+      transparent 74%,
+      rgba(0,0,0, 0.04) 75%,
+      rgba(0,0,0, 0.04) 76%,
+      transparent 77%,
+      transparent
+    )
 }
