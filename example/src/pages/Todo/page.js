@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Checkbox } from "antd";
 import { nanoid } from "nanoid";
 import { createEngine } from "./flume/engine";
@@ -10,6 +10,7 @@ const context = {
     task: {
       name: "task",
       label: "任务",
+      identifyKeys: ["id"],
       properties: {
         id: {
           name: "id",
@@ -30,6 +31,23 @@ const context = {
           name: "status",
           label: "状态",
           type: "enums.taskStatus"
+        }
+      }
+    },
+    test: {
+      name: "test",
+      label: "测试模型",
+      identifyKeys: ["id"],
+      properties: {
+        id: {
+          name: "id",
+          label: "编号",
+          type: "string"
+        },
+        title: {
+          name: "title",
+          label: "标题",
+          type: "string"
         }
       }
     }
@@ -53,6 +71,10 @@ export const TodoPage = () => {
   const nodes = JSON.parse(localStorage.getItem("todo-logic"));
   const engine = createEngine(context);
 
+  useEffect(() => {
+    console.log({ todoList });
+  }, [todoList]);
+
   const onTodoChange = e => {
     console.log(e.target.value);
     setTodo({
@@ -63,9 +85,11 @@ export const TodoPage = () => {
 
   const addTodo = () => {
     console.log({ nodes, todo, todoList });
-    const { todoList: nextTodoList = [] } = engine.resolveRootNode(nodes, {
-      context: { todoItem: todo, todoList: [...todoList] }
+    const { taskList: nextTodoList = [] } = engine.resolveRootNode(nodes, {
+      context: { ...context, toAddTask: todo, lastTaskList: [...todoList] }
     });
+
+    console.log({ nextTodoList });
 
     if (!isEqual(todoList, nextTodoList)) {
       setTodoList([...nextTodoList]);
@@ -75,10 +99,11 @@ export const TodoPage = () => {
 
   const onTodoCheck = todoId => {
     const todoItem = todoList.find(todoItem => todoItem.id === todoId);
-    const { todoList: nextTodoList = [] } = engine.resolveRootNode(nodes, {
+    const { taskList: nextTodoList = [] } = engine.resolveRootNode(nodes, {
       context: {
-        todoItem: { ...todoItem, isCompleted: !todoItem.isCompleted },
-        todoList: [...todoList]
+        ...context,
+        toAddTask: { ...todoItem, isCompleted: !todoItem.isCompleted },
+        lastTaskList: [...todoList]
       }
     });
     console.log({ nextTodoList });

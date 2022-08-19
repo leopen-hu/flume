@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { NodeEditor } from "node-editor";
 import { createFlumeConfig } from "./flume/config";
 import "./editor.css";
+import { useEffect } from "react";
 
 const context = {
   entities: {
     task: {
       name: "task",
       label: "任务",
+      identifyKeys: ["id"],
       properties: {
         id: {
           name: "id",
@@ -30,6 +32,23 @@ const context = {
           type: "enums.taskStatus"
         }
       }
+    },
+    test: {
+      name: "test",
+      label: "测试模型",
+      identifyKeys: ["id"],
+      properties: {
+        id: {
+          name: "id",
+          label: "编号",
+          type: "string"
+        },
+        title: {
+          name: "title",
+          label: "标题",
+          type: "string"
+        }
+      }
     }
   },
   enums: {
@@ -46,15 +65,16 @@ const context = {
 };
 
 export const TodoEditor = () => {
+  const { flumeConfig } = createFlumeConfig(context);
   const initNodes = JSON.parse(localStorage.getItem("todo-logic"));
   const initComments = JSON.parse(localStorage.getItem("todo-logic-comments"));
   const [nodes, setNodes] = useState(initNodes);
   const [comments, setComments] = useState(initComments);
-  const flumeConfig = createFlumeConfig(context);
 
-  const onNodesChange = nodes => {
-    setNodes(nodes);
-    localStorage.setItem("todo-logic", JSON.stringify(nodes));
+  const onNodesChange = targetNodes => {
+    console.log(targetNodes);
+    setNodes(targetNodes);
+    localStorage.setItem("todo-logic", JSON.stringify(targetNodes));
   };
 
   const onCommentsChange = comments => {
