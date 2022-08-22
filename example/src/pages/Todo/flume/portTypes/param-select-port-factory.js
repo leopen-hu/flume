@@ -4,6 +4,7 @@ export const createParamSelectPort = (entities, portTypes) => ({
   type: "selectParamTypePort",
   name: "selectParamTypePort",
   label: "选择参数类型接口",
+  hidePort: true,
   controls: [
     Controls.select({
       name: "paramType",
